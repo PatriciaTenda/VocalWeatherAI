@@ -16,3 +16,6 @@ Ce projet vise à mettre en place une fonctionnalité qui améliorera l'expérie
 
 # Créer un fichier requirements.txt qui va lister tous les packages installés dans notre environnement
     ==>pip freeze > requirements.txt    
+
+# installation de la librairie python azure-cognitiveservices-speech
+    ==> pip install azure-cognitiveservices-speech
