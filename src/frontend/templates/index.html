@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>{{ nom_app }}-Prévisions Météo Vocales</title>
+</head>
+
+<body>
+
+    <h1>{{ nom_app }}</h1>
+
+    <p>Appuyez sur l'icône du micro et parlez! </p>
+
+    <button id="microphone-button" class="material-icon-button">
+        <span class="material-icons">mic</span>
+    </button>       
+    
+    <div id="recording-indicator">Enregistrement...</div>
+    
+    <div id="recognized-text"></div>
+    
+    <div id="weather-info">
+        <h2>Météo pour <span id="city-name"></span></h2>
+        <p>Condition: <span id="condition"></span></p>
+        <p>Température: <span id="temperature"></span></p>
+        <p>Prévisions: <span id="forecast"></span></p>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
