@@ -21,15 +21,9 @@ Ce projet vise à mettre en place une fonctionnalité qui améliorera l'expérie
     ==> pip install azure-cognitiveservices-speech
 
 # Installer FastAPI et Uvicorn
-    ==> pip install fastapi unvicorn
+    ==> pip install flask
 
-# Pour utiliser la commande fastapi run il faut installer au préalable la commande 
-    ==> pip install "fastapi[standard]"
-
-# Pour lancer le serveur 
-    ==>  uvicorn app.backend.main:app --reload
-
-# Installation d el a librairie spaCy  et le modèle français pour le traitement automatique du langage naturel(NLP) pour la recuperation de la localisation dans le service NLP:
+# Installation des librairies spaCy  et le modèle français pour le traitement automatique du langage naturel(NLP) pour la recuperation de la localisation dans le service NLP:
     ==> pip install spacy
     ==> python -m spacy download fr_core_news_sm
     ==> python -m spacy download fr_core_news_md
@@ -39,6 +33,7 @@ Ce projet vise à mettre en place une fonctionnalité qui améliorera l'expérie
 
 # librairie dateparser pour recuperer la date  dans le service NLP:
     ==> pip istall dateparser
+    
 # Hugging Face Transformers et le modèle nécessaire pour recuperer la date  dans le service NLP:
     ==> pip install transformers
     ==> pip install torch
@@ -48,5 +43,5 @@ Ce projet vise à mettre en place une fonctionnalité qui améliorera l'expérie
     ==> pip install requests-cache retry-requests numpy pandas
 
 
-# Installer le SDK Python
+# Installer le SDK Python concernant l'API de gemini pour l'extraction des dates et lieux (seconde option utiliséeet que j'ai adoptée dans le code actuel)
     ==> pip install -q -U google-generativeai
