@@ -1,4 +1,3 @@
-#from fastapi import FastAPI
 from flask import Flask, request, jsonify
 from services.STT import recognize_from_microphone
 from services.meteo import get_weather
