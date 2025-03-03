@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    </head>
+<body>
+    </header>
+
+        <div class="bottom-section">
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-12 weather-info">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Météo</th>
+                                    <th>Image</th>
+                                    <th>Température Max</th>
+                                    <th>Température Min</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for forecast in forecasts %}
+                                    <tr>
+                                        <td>{{ forecast.ville }}</td>
+                                        <td>{{ forecast.date }}</td>
+                                        <td>{{ forecast.weather_code }}</td>
+                                        <td><img src="{{ url_for('static', filename='images/' + forecast.image) }}" alt="{{ forecast.weather_code }}" class="weather-icon"></td>
+                                        <td>{{ forecast.temperature_2m_max }}°C</td>
+                                        <td>{{ forecast.temperature_2m_min }}°C</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='previsions.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

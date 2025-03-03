@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ nom_app }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row header">
+            <div class="profile"> 
+                <h1>Vocal-Weather-AI</h1>
+                <img src="{{ url_for('static', filename='images/profile-icon.png') }}" alt="Icône de profil" class="img-fluid rounded-circle profile-image">
+            </div>
+            <div class="col-8 text-center mt-3">
+                <img src="{{ url_for('static', filename='images/header_icon.png') }}" alt="Image du soleil" class="img-fluid">
+                <h2>Bienvenue sur la page de la météo</h2>
+            </div>
+            <div class="col-2 text-left mt-3">
+                <h3>Date: <time datetime="2024-03-08">{{date}}</time></h3>
+            </div>
+        </div>
+                            
+        <div class="row justify-content-center mt-4 middle-section">
+            <div class="col-12 text-center mt-3">
+                <h5>Appuyez sur le micro pour poser votre question <img src="{{ url_for('static', filename='images/emoticone.png') }}" alt="Emoticone" class="img-fluid small-icon"></h5>
+            </div>
+            <div class="col-md-4 text-center mt-3">
+                <button id="micro-button" class="btn btn-primary rounded-circle p-4">
+                    <img src="{{ url_for('static', filename='images/micro-icon.png') }}" alt="Icône de micro" class="img-fluid">
+                </button>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row justify-content-center mt-4 bottom-section">
+                <div class="col-md-8 weather-info">
+                    <div class="row current-weather">
+                        <div class="col-3">
+                            <img src="{{ url_for('static', filename='images/sun-icon.png') }}" alt="Icône météo actuelle" class="img-fluid">
+                        </div>
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h2 id="ville"></h2>
+                                    <h4 id="temperature"></h4>
+                                    <h4 id="conditions"></h4>
+                                    <h4 id="ressenti"></h4>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <div class="time">
+                                        <!--<h4><time datetime="T10:00:00+01:00"></time></h4>-->
+                                        <p>Heure actuelle : <time id="heure-actuelle"></time></p>
+                                    </div>
+                                    <button class="btn btn-outline-secondary">
+                                        <i class="fas fa-comment-dots"></i> Vous voyez un temps différent ?
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="row forecast-details">
+                        <div class="col-12 text-center">
+                            <h4>Le ciel sera partiellement nuageux. La température minimale sera de 0°.</h4>
+                        </div>
+                    </div>
+        
+                    <div class="row additional-info">
+                        <div class="col">
+                            <p>Qualité de l'air</p>
+                            <p>74</p>
+                        </div>
+                        <div class="col">
+                            <p>Vent</p>
+                            <p>19 km/h</p>
+                        </div>
+                        <div class="col">
+                            <p>Humidité</p>
+                            <p>88%</p>
+                        </div>
+                        <div class="col">
+                            <p>Visibilité</p>
+                            <p>10 km</p>
+                        </div>
+                        <div class="col">
+                            <p>Pression</p>
+                            <p>1030 hPa</p>
+                        </div>
+                        <div class="col">
+                            <p>Point de rosée</p>
+                            <p>1°C</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col text-center">
+                    <a href="{{ url_for('home') }}" id="accueil-link">Accueil</a>
+                </div>
+                <div class="col text-center">
+                    <a href="#middle-section" id="meteo-actuelle-link">Météo actuelle</a>
+                </div>
+                <div class="col text-center">
+                    {% if weather_results %}
+                        <a href="/previsions?data={{ weather_results|tojson|urlencode }}" id="previsions-link">Prévisions</a>
+                    {% endif %}
+                </div>
+                <div class="col text-center">
+                    <a href="#" class="nav-link">Nous contacter</a>
+                </div>
+                <div class="col text-center">
+                    <a href="#" class="nav-link">
+                        <img src="{{ url_for('static', filename='images/settings-icon.png') }}" alt="Icône de paramètres" class="img-fluid settings-icon">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}">
+
+    </script>
+    <script>
+        document.getElementById("micro-button").addEventListener("click", function() {
+    axios.get("http://127.0.0.1:5000/test")
+        .then(response => {
+           let message = response.data.previsions;  // Assurez-vous que votre backend envoie { "message": "..." }
+            alert(message); 
+            console.log(message)
+            console.log(message[0].météo[0])
+            alert(response.data.previsions[0].ville)
+            let previs = response.data.previsions[0].météo[0];
+            document.querySelector("#ville").textContent = response.data.previsions[0].ville;
+            document.querySelector("#temperature").textContent = previs;
+            document.querySelector("#conditions").textContent = response.data.previsions[0].ville;
+            document.querySelector("#ressenti").textContent = response.data.previsions[0].ville;
+            document.querySelector("#heure-actuelle").textContent = response.data.previsions[0].vil
+        .catch(error => {
+            console.error("Erreur :", error);
+            alert("Test échoué");
+        });le;
+        })
+});
+
+    </script>
+    
+</body>
+</html>

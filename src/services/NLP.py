@@ -9,15 +9,14 @@ import json
 load_dotenv()
 
 # Récupérer la clé API
-GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
-if not GEMINI_API_KEY:
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+if not OPENAI_API_KEY:
     raise ValueError("Erreur: la clé API est absente du fichier .env")
 
-# Configurer Gemini avec la clé API
-genai.configure(api_key=GEMINI_API_KEY) 
 
-# Créer un modèle Gemini
-model = genai.GenerativeModel("gemini-1.5-pro-latest")
+
+# Créer un modèle OPENAI_API
+model="gpt-4o-mini"
 
 def get_location_and_date(text):
     today = datetime.today().strftime("%d/%m/%Y")
@@ -76,7 +75,6 @@ def get_location_and_date(text):
     except json.JSONDecodeError:
         return {"error": "Réponse JSON invalide de Gemini"}
 
-"""
+
 if __name__ == "__main__":
     print(get_location_and_date("Quel temps fera-t-il à Reims dans le mois prochain ?"))
-"""

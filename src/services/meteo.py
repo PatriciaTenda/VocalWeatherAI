@@ -61,7 +61,7 @@ def get_weather(lat, lon, date):
 
     print(f"Current temperature_2m {current_temperature_2m}")
     print(f"Current weather_code {current_weather_code}")
-       
+    current_dict = {"temperature" : current_temperature_2m, "weather_code" : current_weather_code}   
 
     # Process daily data. The order of variables needs to be the same as requested.
     daily = response.Daily()
@@ -91,7 +91,12 @@ def get_weather(lat, lon, date):
 
 
     daily_dataframe = pd.DataFrame(data = daily_data)
-    return daily_dataframe
+    
+    return {
+        "current_temperature": current_temperature_2m,
+        "current_weather_code": WEATHER_CODE_MAP.get(current_weather_code, "Données non disponibles"),
+        "daily_forecast": daily_dataframe
+    }
 
 """
 import openmeteo_requests

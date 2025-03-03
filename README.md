@@ -48,5 +48,12 @@ Ce projet vise à mettre en place une fonctionnalité qui améliorera l'expérie
     ==> pip install requests-cache retry-requests numpy pandas
 
 
-# Installer le SDK Python
+# Installer le SDK Python Gemini
     ==> pip install -q -U google-generativeai
+
+
+# Installer le SDK Python Open AI
+    ==> pip install openai
+
+# Installer geopy pour recupérer la latitude et la longitude
+    ==>pip install geopy

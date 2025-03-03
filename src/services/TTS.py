@@ -1,3 +1,85 @@
+from datetime import datetime, timedelta
+import openai # Assure-toi d'importer ton client OpenAI correctement
+from datetime import datetime, timedelta
+import re
+from dotenv import load_dotenv
+import os
+
+
+
+# Charger les variables d'environnement
+load_dotenv()
+
+# Récupérer la clé API
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+if not OPENAI_API_KEY:
+    raise ValueError("Erreur: la clé API est absente du fichier .env")
+
+
+
+# Créer un modèle OPENAI_API
+model="gpt-4o-mini"
+# Définition des dates nécessaires
+today = datetime.today().strftime("%d/%m/%Y")
+tomorrow = (datetime.today() + timedelta(days=1)).strftime("%d/%m/%Y")
+in_two_weeks = (datetime.today() + timedelta(weeks=2)).strftime("%d/%m/%Y")
+
+# Texte à analyser
+text = "Quel temps fera-t-il à Lyon dans 10 jours ?"
+client = OpenAI()
+# Création de la requête
+completion = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {
+            "role": "user",
+            "content": f"""
+    Tu es un assistant météo qui doit extraire **avec précision** :
+    - Les noms de villes, pays ou lieux.
+    - Les dates mentionnées et les convertir **exactement** au format JJ/MM/AAAA.
+
+        **IMPORTANT : Ne fais aucune approximation, utilise des dates exactes.**  
+        N'invente pas de dates.  
+        Ne donne pas plusieurs jours si ce n'est pas demandé.  
+
+        **Règles pour la conversion des dates :**
+    - **"aujourd’hui" → {today}**
+    - **"demain" → {tomorrow}**
+    - **"dans deux semaines" → {in_two_weeks}**  
+    - **"dans X jours" → Ajoute X jours à aujourd’hui et donne une date exacte.**  
+    - **"dans X semaines" → Ajoute X * 7 jours à aujourd’hui et donne une date exacte.**  
+
+        **Exemples corrects :**
+    - **Texte :** "Quel temps fera-t-il à Paris aujourd’hui ?"  
+      **Réponse attendue :**
+      {{
+        "localisations": ["Paris"],
+        "dates": ["{today}"]
+      }}
+    - **Texte :** "Quel temps fera-t-il à Reims dans deux semaines ?"  
+      **Réponse attendue :**
+      {{
+        "localisations": ["Reims"],
+        "dates": ["{in_two_weeks}"]
+      }}
+    - **Texte :** "Quel temps fera-t-il à Lyon dans 10 jours ?"  
+      **Réponse attendue :**
+      {{
+        "localisations": ["Lyon"],
+        "dates": ["{(datetime.today() + timedelta(days=10)).strftime("%d/%m/%Y")}"]
+      }}
+
+      **Texte à analyser :**
+    {text}
+
+    **Réponds uniquement en JSON valide**, sans texte supplémentaire.
+    """
+        }
+    ]
+)
+
+print(completion.choices[0].message)
 
 """
 import openmeteo_requests

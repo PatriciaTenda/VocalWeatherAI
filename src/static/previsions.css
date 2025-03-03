@@ -1,0 +1,78 @@
+/*CSS pour la page des prévisions*/
+body {
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+}
+
+.header {
+    background-color: #add8e6;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.header h1 {
+    font-size: 2em;
+    margin: 0;
+}
+
+.header h3 {
+    margin: 0;
+    text-align: left;
+    position: absolute; /* Positionner la date de manière absolue */
+    bottom: 90px; /* Ajuster la position verticale */
+    left: 50px; /* Ajuster la position horizontale */
+}
+
+.header p {
+    margin: 0;
+}
+
+.middle-section {
+    
+    padding: 20px;
+    text-align: center;
+}
+
+.header-icon {
+    max-height: 200px;
+    margin-bottom: 10px;
+}
+
+.weather-info {
+    padding: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    background-color: #beddfa;
+    border: 1px solid #020525;
+    color: hsla(192, 100%, 2%, 0.884);
+    padding: 8px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.table th {
+    background-color: #010316;
+    color: rgb(248, 252, 253);
+    border-radius: 10px;
+}
+
+.weather-icon {
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin: 0 auto;
+}

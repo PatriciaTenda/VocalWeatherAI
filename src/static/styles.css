@@ -1,0 +1,192 @@
+body {
+    background-color: #f0f0f0;
+}
+
+.header {
+    background-color: #add8e6;
+    color: black;
+    padding: 10px, 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 375px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2px;
+    width: 100%
+    
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2em;
+    margin-bottom: 10px; /* Ajout d'une marge en dessous du titre */
+}
+
+.header img {
+    max-height: 300px;
+}
+
+.profile img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+}
+
+header h3 {
+    font-size: 1em;
+    margin-left: auto;
+    padding: 5px 10px;
+    white-space: nowrap;
+    flex-shrink: 0; /* Empêche la date de rétrécir */
+    min-width: 100px; /* Définit une largeur minimale */
+    overflow: hidden; /* Masque le contenu qui dépasse */
+}
+
+.header time {
+    font-size: 1em;
+    margin-left: auto;
+    padding: 5px 10px;
+    white-space: nowrap;
+    flex-shrink: 0; /* Empêche la date de rétrécir */
+    min-width: 100px; /* Définit une largeur minimale */
+    overflow: hidden; /* Masque le contenu qui dépasse */
+}
+
+.middle-section {
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2px;
+    width: 100%
+}
+
+
+.middle-section h2, .middle-section h5 {
+    margin-top: 20px;
+}
+
+.small-icon {
+    width: 60px; /* Ajustez la largeur selon vos besoins */
+    height: 60px; /* Ajustez la hauteur selon vos besoins */
+}
+
+#micro-button img {
+    width: 60px;
+    height: 60px;
+}
+
+.bottom-section {
+    background-color: #add8e6;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
+
+.weather-info {
+    background-color: #1baaec; /* Couleur de fond bleu foncé */
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.weather-info h2,
+.weather-info h3 {
+    color: white;
+}
+
+.current-weather {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.current-weather img {
+    width: 200px;
+    height: 200px;
+    margin-right: 200px;
+}
+
+.forecast-details {
+    margin-bottom: 60px;
+}
+
+.forecast-details p {
+    text-align: center;
+}
+
+.additional-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.additional-info p {
+    margin: 5px 0;
+}
+
+.btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+.footer {
+    background-color: #e0e0e0; /* Couleur de fond grise */
+    padding: 3px 0;
+    border-top: 10px solid #bdbdbd; /* Bordure supérieure */
+    position: fixed; /* Pour que le pied de page reste en bas */
+    bottom: 0;
+    width: 98.5%;
+}
+
+.footer .nav-link {
+    color: #333; /* Couleur du texte */
+    text-decoration: none;
+    padding: 5px 5px;
+    display: inline-block;
+}
+
+.footer .nav-link:hover {
+    color: #757575; /* Couleur du texte au survol */
+}
+
+.settings-icon {
+    width: 25px;
+    height: 25px;
+}
+
+@media (max-width: 768px) {
+    .header time {
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
+.footer a {
+    text-decoration: none;
+    color: #333;
+}
