@@ -20,7 +20,7 @@
                 <h2>Bienvenue sur la page de la météo</h2>
             </div>
             <div class="col-2 text-left mt-3">
-                <h3>Date: <time datetime="2024-03-08">{{date}}</time></h3>
+                <h3>Date:<time id = "date__"></time></h3>
             </div>
         </div>
                             
@@ -53,7 +53,7 @@
                                 <div class="col-6 text-right">
                                     <div class="time">
                                         <!--<h4><time datetime="T10:00:00+01:00"></time></h4>-->
-                                        <p>Heure actuelle : <time id="heure-actuelle"></time></p>
+                                        <h4>Heure actuelle : <time id="heure-actuelle"></time></h4>
                                     </div>
                                     <button class="btn btn-outline-secondary">
                                         <i class="fas fa-comment-dots"></i> Vous voyez un temps différent ?
@@ -108,9 +108,9 @@
                     <a href="#middle-section" id="meteo-actuelle-link">Météo actuelle</a>
                 </div>
                 <div class="col text-center">
-                    {% if weather_results %}
+                  
                         <a href="/previsions?data={{ weather_results|tojson|urlencode }}" id="previsions-link">Prévisions</a>
-                    {% endif %}
+                    
                 </div>
                 <div class="col text-center">
                     <a href="#" class="nav-link">Nous contacter</a>
@@ -131,26 +131,55 @@
 
     </script>
     <script>
+        document.querySelector("#date__").textContent = new Date().toLocaleDateString();
+        document.querySelector("#heure-actuelle").textContent = new Date().toLocaleTimeString();
         document.getElementById("micro-button").addEventListener("click", function() {
-    axios.get("http://127.0.0.1:5000/test")
-        .then(response => {
-           let message = response.data.previsions;  // Assurez-vous que votre backend envoie { "message": "..." }
-            alert(message); 
-            console.log(message)
-            console.log(message[0].météo[0])
-            alert(response.data.previsions[0].ville)
-            let previs = response.data.previsions[0].météo[0];
-            document.querySelector("#ville").textContent = response.data.previsions[0].ville;
-            document.querySelector("#temperature").textContent = previs;
-            document.querySelector("#conditions").textContent = response.data.previsions[0].ville;
-            document.querySelector("#ressenti").textContent = response.data.previsions[0].ville;
-            document.querySelector("#heure-actuelle").textContent = response.data.previsions[0].vil
-        .catch(error => {
-            console.error("Erreur :", error);
-            alert("Test échoué");
-        });le;
-        })
-});
+          axios.get("http://127.0.0.1:5000/test")
+            .then(response => {
+               // On récupère les résultats sous la clé "résultats" qui est un tableau.
+               let results = response.data.résultats;
+               console.log("[DEBUG] Résultats reçus :", results);
+               
+               if (!results || results.length === 0) {
+                 alert("Aucun résultat n'a été trouvé.");
+                 return;
+               }
+               
+               // On utilise le premier résultat comme exemple.
+               let result = results[0];
+               alert("Ville détectée : " + result.ville);
+               
+               // Affichage dans la console des détails de la première prévision météo.
+               if(result.météo && result.météo.length > 0) {
+                 console.log("[DEBUG] Première prévision :", result.météo[0]);
+               } else {
+                 console.log("[DEBUG] Aucune prévision disponible pour cette ville.");
+               }
+               
+               // Mise à jour du DOM avec les données reçues.
+               // Par exemple, on affiche le nom de la ville.
+               document.querySelector("#ville").textContent = result.ville;
+               
+               let temperature = result.current_temperature;
+                let temperatureArrondie = Math.round(temperature);
+
+               // On affiche la température actuelle et le code météo.
+               document.querySelector("#temperature").textContent = "Température actuelle : " 
+                 + temperatureArrondie + "°C (" + result.current_weather_code + ")";
+               
+               // On affiche, par exemple, la date et le code météo de la première prévision.
+               if(result.météo && result.météo.length > 0) {
+                 let firstPrevision = result.météo[0];
+                 document.querySelector("#heure-actuelle").textContent = new Date().toLocaleTimeString();
+               } else {
+                document.querySelector("#heure-actuelle").textContent = new Date().toLocaleTimeString();
+               }
+            })
+            .catch(error => {
+               console.error("Erreur :", error);
+               alert("Test échoué");
+            });
+        });
 
     </script>
     
