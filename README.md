@@ -2,51 +2,51 @@
 Ce projet vise à mettre en place une fonctionnalité qui améliorera l'expérience utilisateur concernant le besoin d'obtenir les informations météorologiques vocalement, sans avoir besoin de saisir un texte ou de faire une recherche sur internet via une application météo.
 
 # Pour créer l'environnement 
+
 ```bash
      python -m venv env
 
-
+```bash
 # Pour activer l'environnement
 
 ```bash
      .\env\Scripts\activate
 
-
+```bash
 
 # Installation des packages à utiliser
 
-```bash
 
 # Pour voir les packages installés dans notre environnement
 
 ```bash
      pip freeze
 
-
+```bash
 # Créer un fichier requirements.txt qui va lister tous les packages installés dans notre environnement
 
 ```bash
      pip freeze > requirements.txt    
 
-
+```bash
 # installation de la librairie python azure-cognitiveservices-speech
 
 ```bash
       pip install azure-cognitiveservices-speech
 
-
+```bash
 # Installer FastAPI et Uvicorn
 
 ```bash
      pip install fastapi unvicorn
 
-
+```bash
 # Pour utiliser la commande fastapi run il faut installer au préalable la commande 
 
 ```bash
      pip install "fastapi[standard]"
 
-
+```bash
 # Pour lancer le serveur 
 
 ```bash
